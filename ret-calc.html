@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="CreditShoot.com Retirement Calculator, put in your numbers. Factor in Social Security payments, current income, rate of return and withdrawal amounts. How to plan for retirement">
+<meta name="keywords" content="Retirement, Retirement Planning, Retirement Calculator">
+<meta name="viewport" content="width=device-width, initial-scale=.8">
+
+
+<title>When Will I Be Able to Retire Calculator</title>
+<script type="text/javascript" src="fusioncharts/js/fusioncharts.js"></script>
+<script type="text/javascript" src="fusioncharts/js/themes/fusioncharts.theme.fint.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link href="nouislider.min.css" rel="stylesheet">
+<link rel="icon" href="images/Logo.jpg">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext">
+<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77239251-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+
+
+function AddData() {
+
+
+    var x = document.getElementById("estsocial").value.replace(/,/g, '');
+    
+
+    // .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return x;
+}
+
+function AmtFromSav(){
+
+    var diff = document.getElementById("retage").value - document.getElementById("age").value;
+    var savann = parseFloat(document.getElementById("savannually").value.replace(/,/g, ''));
+    var exprate = (document.getElementById("expectedrate").value)/100;
+
+
+    var amtFromInv = savann*(((Math.pow((1+exprate),diff))-1)/exprate);
+    //parseFloat('100,000.00'.replace(/,/g, ''))
+    var alreadysav = parseFloat(document.getElementById("alreadysaved").value.replace(/,/g, ''));
+    // var amtFromAlready = Math.round((alreadysav*(Math.pow((1+exprate),diff)))/12);     
+    var amtFromAlready = Math.round(.035*alreadysav*(Math.pow((1+exprate),diff))/12);
+
+
+    var fromInv = Math.round((.035 * amtFromInv)/12);
+
+    var cantake = fromInv + amtFromAlready;
+
+
+    // var amtFromInv = 32000 * diff;
+
+    return cantake;
+
+
+}
+
+function UpdateFields() {
+
+    Number("annualincome").toLocaleString('en');
+
+
+
+    
+}
+
+function WhatYouNeed() {
+    var what = Math.round((parseFloat(document.getElementById("annualincome").value.replace(/,/g, '')) * document.getElementById("percentneeded").value)/12);
+    return what;
+}
+
+
+
+  FusionCharts.ready(function(){
+
+    // document.getElementById('data').onload = function create() {
+
+    var revenueChart = new FusionCharts({
+        "type": "stackedcolumn2d",
+        "renderAt": "chartContainer",
+        "width": "500",
+        "height": "300",
+        "dataFormat": "json",
+        "dataSource":  {
+          // "chart": {
+    "chart": {
+        "caption": "Monthly Retirement Income Estimator",
+        "subCaption": "During retirment years",
+        "xAxisname": "Quarter",
+        "yAxisName": "Income (In USD)",
+        "showSum": "1",
+        "numberPrefix": "$",
+        "theme": "fint"
+    },
+    "categories": [
+        {
+            "category": [
+                {
+                    "label": "What you'll have"
+                },
+                {
+                    "label": "What you'll need"
+                }
+
+            ]
+        }
+    ],
+    "dataset": [
+        {
+            "seriesname": "Social Security Income",
+            "data": [
+                {
+                    "value": AddData()
+                },
+                {
+                    "value": "0"
+                }
+
+            ]
+        },
+        {
+            "seriesname": "Income From Savings",
+            "data": [
+                {
+                    "value": AmtFromSav()
+                },
+                {
+                    "value": WhatYouNeed()
+                }
+
+            ]
+        }
+    ]
+}
+});
+
+    revenueChart.render();
+  });
+
+  function Create(){
+
+
+    var revenueChart = new FusionCharts({
+        "type": "stackedcolumn2d",
+        "renderAt": "chartContainer",
+        "width": "500",
+        "height": "300",
+
+        "dataFormat": "json",
+        "dataSource":  {
+          // "chart": {
+    "chart": {
+        "caption": "Monthly Retirement Income Estimator",
+        "subCaption": "During retirment years",
+        "xAxisname": "Quarter",
+        "yAxisName": "Income (In USD)",
+        "showSum": "1",
+        "numberPrefix": "$",
+        "theme": "fint"
+    },
+    "categories": [
+        {
+            "category": [
+                {
+                    "label": "What you'll have"
+                },
+                {
+                    "label": "What you'll need"
+                }
+
+            ]
+        }
+    ],
+    "dataset": [
+        {
+            "seriesname": "Social Security Income",
+            "data": [
+                {
+                    "value": AddData()
+                },
+                {
+                    "value": "0"
+                }
+
+            ]
+        },
+        {
+            "seriesname": "Income From Savings",
+            "data": [
+                {
+                    "value": AmtFromSav()
+                },
+                {
+                    "value": WhatYouNeed()
+                }
+
+            ]
+        }
+    ]
+}
+});
+
+    revenueChart.render();
+  };
+
+</script>
+
+
+<script type=text/javascript>
+
+
+
+
+
+
+</script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CreditShoot</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+       <!--  <li><a href="#">Link</a></li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Articles <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="Retirement-Planning.html">Getting Started on your Retirment Plan</a></li>
+            <li><a href="Nest-Egg-Lasts.html">Making Sure Your Nest Egg Lasts</a></li>
+            <li><a href="ret-yeah-right.html">Retirement, Yeah Right!</a></li>
+            <li><a href="coming-clean-on-spending.html">Coming Clean on Your Spending</a></li>
+            <li><a href="top-ten-mistakes.html">Top 10 Retirement Mistakes</a></li>
+            
+            <!-- <li role="separator" class="divider"></li> -->
+            <!-- <li><a href="#">Separated link</a></li> -->
+            <!-- <li role="separator" class="divider"></li> -->
+            <!-- <li><a href="#">One more separated link</a></li> -->
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calculators <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="ret-calc.html">Retirement Calculator</a></li>
+            <!-- <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li> -->
+          </ul>
+        </li>
+      </ul>
+      
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<script src="nouislider.min.js"></script>
+<div id="adspace1">
+</div>
+
+<H3><span id="title" class="label label-warning"> RETIREMENT SNAPSHOT </span> </h3>
+<br>
+<span class="label label-info">Your Info</span>
+
+<div>
+
+    <div id="forminputs" cellpadding="1" linespacing="2" border="1">
+        <br>
+        Current age: &nbsp 
+        <input id="age" type="number" step="1" class="form-control" value="35" onchange="AddData(), UpdateFields(), AmtFromSav(), WhatYouNeed(), Create()">
+        <div style="display:inline-block;" id="soft" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()"></div>
+        <br>
+        <br>Your planned Retirement Age: &nbsp 
+        <input id="retage" size="2" class="form-control" type="number" value="65" max="85" min="30" step="1" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <div style="display:inline-block;" id="retAgeSlider" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()"></div>
+        <br>
+        <br>Your annual income: &nbsp 
+        <input id="annualincome" name="value" size="5" class="form-control" type="text" value="40,000" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <div style="display:inline-block;" id="anIncSlider" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()"></div>
+        <br>
+        
+        <br>Current amount you are saving annually: &nbsp 
+        <input id="savannually" name="value" type="text" step="10000" size="6" class="form-control" value="10000" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <div style="display:inline-block;" id="savAnSlider" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()"></div>
+        <br>
+        
+        <br>Amount you already have saved: &nbsp 
+        <input id="alreadysaved" name="value" type="text" size="7" class="form-control" value="25000" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <div style="display:inline-block;" id="alSavSlider" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()"></div>
+        <br>
+        
+        <br>Percent of current income that you will need in retirement: &nbsp 
+        <input id="percentneeded" type="number" min="0" max="1" step=".05" class="form-control" size="2" value=".75" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <div style="display:inline-block;" id="perNeedSlider" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()"></div>
+        <br>
+        
+        <br>Percent expected rate of return on investments (ex. 4.5): &nbsp 
+        <input id="expectedrate" type="number" min="0" step=".5" max="6" size="1" class="form-control" value="4" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <div style="display:inline-block;" id="ratRetSlider" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()"></div>
+        <br>
+        
+        <br>Estimated monthly social security and pension payments: &nbsp 
+        <input id="estsocial" name="value" type="text" step="500" size="3" class="form-control" value="1,500" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+    </div>
+</div>
+
+ <div id="chartContainer">load here</div>
+
+<div id="dataval">
+    <script>
+        $(document).ready(function() {
+            $("#age").attr({
+               "max" : 95,        // substitute your own
+               "min" : 15          // values (or variables) here
+            });
+
+        });
+
+
+     </script>  
+
+     <script>
+
+             $("[name='value']").blur(function(event) {
+
+          // skip for arrow keys
+          if(event.which >= 37 && event.which <= 40) return;
+
+          // format number
+          $(this).val(function(index, value) {
+            return value
+            .replace(/\D/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            ;
+          });
+        });
+
+    </script> 
+</div>
+
+<div id="ageSlider">        
+    <div style="visibility: hidden">Value: <span value = "88" id="hard" ></span></div>
+        <div>
+            <script>
+            var softSlider = document.getElementById('soft');
+        noUiSlider.create(softSlider, {
+            start: 35,
+            range: {
+                min: 20,
+                max: 100
+            },
+            pips: {
+                mode: 'values',
+                values: [20, 60, 100],
+                density: 5
+            }
+        });
+            </script>
+        <div>
+        <script>
+                var softValue = document.getElementById("hard");
+        softSlider.noUiSlider.on('update', function( values, handle ){
+            softValue.innerHTML = Math.round(values[handle]);
+        });
+            </script>
+            <script>
+            var hardvalue = document.getElementById("age");
+            softSlider.noUiSlider.on('update', function( values, handle) {
+            hardvalue.value = softValue.innerHTML;
+            document.getElementById("age").onchange();
+            });
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="retAgeDiv">        
+    <div style="visibility: hidden">Value: <span value = "88" id="retAgeSpan" ></span></div>
+        <div>
+            <script>
+            var retAgeSlider = document.getElementById('retAgeSlider');
+        noUiSlider.create(retAgeSlider, {
+            start: 65,
+            range: {
+                min: 20,
+                max: 100
+            },
+            pips: {
+                mode: 'values',
+                values: [20, 60, 100],
+                density: 5
+            }
+        });
+            </script>
+        <div>
+        <script>
+                var retAgeValue = document.getElementById("retAgeSpan");
+        retAgeSlider.noUiSlider.on('update', function( values, handle ){
+            retAgeValue.innerHTML = Math.round(values[handle]);
+        });
+            </script>
+            <script>
+            var retAgeBoxValue = document.getElementById("retage");
+            retAgeSlider.noUiSlider.on('update', function( values, handle) {
+            retAgeBoxValue.value = retAgeValue.innerHTML;
+            document.getElementById("retage").onchange();
+            });
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="anIncDiv">        
+    <div style="visibility: hidden">Value: <span value = "88" id="anIncSpan" ></span></div>
+        <div>
+            <script>
+            var anIncSlider = document.getElementById('anIncSlider');
+        noUiSlider.create(anIncSlider, {
+            start: 50000,
+            step: 5000,
+            range: {
+                min: 0,
+                max: 500000
+            },
+            pips: {
+                mode: 'values',
+                values: [0, 500000],
+                density: 10
+            }
+        });
+            </script>
+        <div>
+        <script>
+                var anIncValue = document.getElementById("anIncSpan");
+        anIncSlider.noUiSlider.on('update', function( values, handle ){
+            anIncValue.innerHTML = Math.round(values[handle]);
+        });
+            </script>
+            <script>
+            var anIncBoxValue = document.getElementById("annualincome");
+            anIncSlider.noUiSlider.on('update', function( values, handle) {
+            anIncBoxValue.value = anIncValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("annualincome").onchange();
+            });
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="savAnDiv">        
+    <div style="visibility: hidden">Value: <span value = "88" id="savAnSpan" ></span></div>
+        <div>
+            <script>
+            var savAnSlider = document.getElementById('savAnSlider');
+        noUiSlider.create(savAnSlider, {
+            start: 10000,
+            step: 1000,
+            range: {
+                min: 0,
+                max: 100000
+            },
+            pips: {
+                mode: 'values',
+                values: [0, 100000],
+                density: 10
+            }
+        });
+            </script>
+        <div>
+        <script>
+                var savAnValue = document.getElementById("savAnSpan");
+        savAnSlider.noUiSlider.on('update', function( values, handle ){
+            savAnValue.innerHTML = Math.round(values[handle]);
+        });
+            </script>
+            <script>
+            var savAnBoxValue = document.getElementById("savannually");
+            savAnSlider.noUiSlider.on('update', function( values, handle) {
+            savAnBoxValue.value = savAnValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("savannually").onchange();
+            });
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="alSavDiv">        
+    <div style="visibility: hidden">Value: <span value = "88" id="alSavSpan" ></span></div>
+        <div>
+            <script>
+            var alSavSlider = document.getElementById('alSavSlider');
+        noUiSlider.create(alSavSlider, {
+            start: 30000,
+            step: 5000,
+            range: {
+                min: 0,
+                max: 3000000
+            },
+            pips: {
+                mode: 'values',
+                values: [0, ],
+                density: 10
+            }
+        });
+            </script>
+        <div>
+        <script>
+                var alSavValue = document.getElementById("alSavSpan");
+        alSavSlider.noUiSlider.on('update', function( values, handle ){
+            alSavValue.innerHTML = Math.round(values[handle]);
+        });
+            </script>
+            <script>
+            var alSavBoxValue = document.getElementById("alreadysaved");
+            alSavSlider.noUiSlider.on('update', function( values, handle) {
+            alSavBoxValue.value = alSavValue.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            document.getElementById("alreadysaved").onchange();
+            });
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="perNeedDiv">        
+    <div style="visibility: hidden">Value: <span value = "88" id="perNeedSpan" ></span></div>
+        <div>
+            <script>
+            var perNeedSlider = document.getElementById('perNeedSlider');
+        noUiSlider.create(perNeedSlider, {
+            start: .75,
+            step: .05,
+            range: {
+                min: .2,
+                max: 1
+            },
+            pips: {
+                mode: 'values',
+                values: [.2, 1],
+                density: 10
+            }
+        });
+            </script>
+        <div>
+        <script>
+                var perNeedValue = document.getElementById("perNeedSpan");
+        perNeedSlider.noUiSlider.on('update', function( values, handle ){
+            perNeedValue.innerHTML = values[handle];
+        });
+            </script>
+            <script>
+            var perNeedBoxValue = document.getElementById("percentneeded");
+            perNeedSlider.noUiSlider.on('update', function( values, handle) {
+            perNeedBoxValue.value = perNeedValue.innerHTML;
+            document.getElementById("percentneeded").onchange();
+            });
+            </script>
+        </div>
+    </div>
+</div>
+
+<div id="ratRetDiv">        
+    <div style="visibility: hidden">Value: <span value = "88" id="ratRetSpan" ></span></div>
+        <div>
+            <script>
+            var ratRetSlider = document.getElementById('ratRetSlider');
+        noUiSlider.create(ratRetSlider, {
+            start: 4,
+            step: .5,
+            range: {
+                min: 1,
+                max: 6
+            },
+            pips: {
+                mode: 'values',
+                values: [ ],
+                density: 20
+            }
+        });
+            </script>
+        <div>
+        <script>
+                var ratRetValue = document.getElementById("ratRetSpan");
+        ratRetSlider.noUiSlider.on('update', function( values, handle ){
+            ratRetValue.innerHTML = values[handle];
+        });
+            </script>
+            <script>
+            var ratRetBoxValue = document.getElementById("expectedrate");
+            ratRetSlider.noUiSlider.on('update', function( values, handle) {
+            ratRetBoxValue.value = ratRetValue.innerHTML;
+            document.getElementById("expectedrate").onchange();
+            });
+            </script>
+        </div>
+    </div>
+</div>
+
+
+ 
+
+  
+
+
+</body>
+</html>
+
+  <div id="searchbox">
+     <script> 
+      (function() {
+        var cx = '014424829117039008416:-dmrlugjn2s';
+        var gcse = document.createElement('script');
+        gcse.type = 'text/javascript';
+        gcse.async = true;
+        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+    <div class="searchbox">
+    <gcse:search></gcse:search>
+    </div>
+  </div>

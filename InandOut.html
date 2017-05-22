@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CS | Monthly Budget</title>
+<script type="text/javascript" src="fusioncharts/js/fusioncharts.js"></script>
+<script type="text/javascript" src="fusioncharts/js/themes/fusioncharts.theme.fint.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link href="nouislider.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext">
+
+
+<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/IOstylesheet.css">
+
+
+</head>
+
+<script type="text/javascript">
+  FusionCharts.ready(function(){
+
+    // document.getElementById('data').onload = function create() {
+
+    var revenueChart = new FusionCharts({
+        "type": "stackedcolumn2d",
+        "renderAt": "chartContainer",
+        "width": "500",
+        "height": "375",
+        "dataFormat": "json",
+        "dataSource":  {
+          // "chart": {
+    "chart": {
+        "caption": "Income and Expenses",
+        "subCaption": "For the month",
+        "xAxisname": "Month",
+        "yAxisName": "",
+        "showSum": "1",
+        "numberPrefix": "$",
+        "theme": "fint"
+    },
+    "categories": [
+        {
+            "category": [
+                {
+                    "label": "Coming In"
+                },
+                {
+                    "label": "Going Out"
+                }
+
+            ]
+        }
+    ],
+    "dataset": [
+        {
+            "seriesname": "Income From Savings",
+            "data": [
+                {
+                    "value": AddData()
+                },
+                {
+                    "value": "5"
+                }
+
+            ]
+        }
+    ]
+}
+});
+
+    revenueChart.render();
+  });
+
+  function Create(){
+
+
+    var revenueChart = new FusionCharts({
+        "type": "stackedcolumn2d",
+        "renderAt": "chartContainer",
+        "width": "500",
+        "height": "300",
+        "dataFormat": "json",
+        "dataSource":  {
+          // "chart": {
+    "chart": {
+        "caption": "Monthly Retirement Income Estimator",
+        "subCaption": "During retirment years",
+        "xAxisname": "Quarter",
+        "yAxisName": "Income (In USD)",
+        "showSum": "1",
+        "numberPrefix": "$",
+        "theme": "fint"
+    },
+    "categories": [
+        {
+            "category": [
+                {
+                    "label": "Cooming In"
+                },
+                {
+                    "label": "Going Out"
+                }
+
+            ]
+        }
+    ],
+    "dataset": [
+        {
+            "seriesname": "Income From Savings",
+            "data": [
+                {
+                    "value": "5"
+                },
+                {
+                    "value": "5"
+                }
+
+            ]
+        }
+    ]
+}
+});
+
+    revenueChart.render();
+  };
+
+</script>
+
+<script>
+
+function AddData() {
+
+
+    var x = parseInt(document.getElementById("cat1Amt").value.replace(/,/g, '')) + 
+    		parseInt(document.getElementById("cat2Amt").value.replace(/,/g, '')) +
+    		parseInt(document.getElementById("cat3Amt").value.replace(/,/g, '')) +
+    		parseInt(document.getElementById("cat4Amt").value.replace(/,/g, '')) +
+    		parseInt(document.getElementById("cat5Amt").value.replace(/,/g, '')) +
+    		parseInt(document.getElementById("cat6Amt").value.replace(/,/g, '')) +
+    		parseInt(document.getElementById("cat7Amt").value.replace(/,/g, '')) +
+    		parseInt(document.getElementById("cat8Amt").value.replace(/,/g, '')) +
+    		parseInt(document.getElementById("cat9Amt").value.replace(/,/g, '')) +
+    		parseInt(document.getElementById("cat10Amt").value.replace(/,/g, '')) +
+    		parseInt(document.getElementById("cat11Amt").value.replace(/,/g, ''));
+    		
+    		
+    totIncBoxValue = document.getElementById("totIncAmt");
+
+    totIncBoxValue.value = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");		
+    // // .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    
+    return x;
+}
+
+</script>
+
+<body>
+
+<h1>Creditshoot Monthly Budget</h1>
+	<div id="inForm"> 
+
+		<h3>Coming In</h3>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="1,000" > 
+		<br>
+		<br>
+	<input id="cat2" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat2Amt" class="form-control"type="text" value="1000" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat3Amt" class="form-control"type="text" value="1000" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat4Amt" class="form-control"type="text" value="1000" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat5Amt" class="form-control"type="text" value="1000" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat6Amt" class="form-control"type="text" value="1000" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat7Amt" class="form-control"type="text" value="1000" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat8Amt" class="form-control"type="text" value="1000" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat9Amt" class="form-control"type="text" value="1000" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat10Amt" class="form-control"type="text" value="1000" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat11Amt" class="form-control"type="text" value="1000" >
+		<br>
+		<br> 
+		Total Income<input id="totIncAmt" class="form-control"type="text" value="1200" target="total">
+	</div>
+
+		<div id="outForm"> 
+
+		<h3>Going Out</h3>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br>
+	<input id="cat2" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat2Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br>
+	<input id="cat1" type="text" class="form-control" target="" value="testtt" >&nbsp <input id="cat1Amt" class="form-control"type="text" value="testtt" > 
+		<br>
+		<br> 
+		Total Expenses<input id="cat1Amt" class="form-control"type="text" value="testtt" target="total">
+
+	</div>
+
+	<div id="chartContainer">load here</div>
+</body>
+
+
+</html>

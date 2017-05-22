@@ -1,0 +1,256 @@
+#woman {
+
+    float: right;
+    margin: 5px 5px 5px 5px;
+    height: 200px;
+    width: 300px;
+}
+
+.large {
+	display: block;
+    margin: 0 auto;
+    height: 400px;
+    width: 600px;
+}
+
+.homepic {
+	display: block;
+    float: left;
+    margin: 0px 7px 0px 0px;
+    height: 400px;
+    width: 600px;
+}
+
+figure {
+	display: block;
+	margin: 0 auto;
+	width: 600px;
+}
+
+
+figcaption {
+  
+  width:100%;
+  font-family: Arial;
+  font-size: 12px;
+  text-align: right;
+  white-space: nowrap;
+  
+}
+
+.pic {
+	display: block;
+	margin: 0 auto;
+}
+
+#beach {
+
+    float: left;
+    margin: 5px 10px 5px 0px;
+    height: 200px;
+    width: 300px;
+}
+
+#container {
+	margin: auto;
+    width: 60%;
+	font-size: 20px;
+	font-family: verdana;
+
+}
+
+h2 {
+	font-family: 'Oswald' , sans-serif;
+	font-size: 36px;
+}
+
+p {
+	font-family: 'Lato' , sans-serif;
+	
+}
+
+#title {
+	padding: 15px 0px 0px 200px;
+	font-family: 'Oswald' , sans-serif;
+
+	text-align: left;
+	background-color: transparent;
+}
+
+html *{
+background-color: #FAFAFA;
+
+}
+
+#header {
+	
+	height: 90px;
+	font-size: 35px;
+	font-family: verdana;
+	background-color: grey;
+
+}
+
+li a{
+	color: black;
+
+}
+
+body { padding-top: 20px; }
+
+.navbar-default {
+	color: red;
+}
+.navbar-brand {
+	font-size: 30px;
+	color: red;
+}
+
+.navbar-default .navbar-brand {
+    color: purple;
+}
+
+.dropdown-toggle {
+	font-size: 20px;
+	color: black;
+}
+
+.searchbox {
+
+	padding: 0px;
+	margin: 0px;
+	max-width: 500x;
+	width: 100%;
+	color: black;
+	float: left;
+	font-size: 30px;
+
+
+	
+}
+
+#right-tower {
+	float: right;
+	margin: 5px;
+	/*border: 1px solid black;*/
+}
+
+#left-tower {
+	float: left;
+	margin: 5px;
+	border: 1px solid black;
+
+	
+}
+
+#banner {
+	
+	display: inline-block;
+	
+}
+
+#wrapper {
+	text-align: center;
+}
+
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+  height: 50px;
+  box-shadow: none;
+}
+
+
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+  
+  line-height: normal;
+}
+
+
+
+@media (max-width: 800px) {
+
+	.navbar-brand {
+        
+        font-size: 50px;
+    }
+
+    .dropdown-toggle {
+	font-size: 29px;
+	
+	}
+
+	.dropdown-menu {
+		font-size: 20px;
+		padding-top: 5px;
+		
+	}
+
+	#wrapper {
+		width: 100vw;
+	}
+
+	li {
+		padding-bottom: 5px;
+		
+	}
+
+	#container {
+		width: 98%;
+		padding-top: 1px;
+		display: block;
+	}
+	#right-tower {
+	float: right;
+	margin: 5px;
+	border: 1px solid black;
+	/*border: 1px solid black;*/
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+		height: 25%;
+		float: 0;
+		margin: 0;
+
+	}
+/*	.large 	{
+  
+  display: block;
+  position: absolute;
+  max-width: 400px;
+  height: 300px;
+  margin: 0;
+}*/
+
+	.large {
+	display: block;
+    margin: 0;
+    margin-left: 1px;
+    height: 300px;
+    max-width: 400px;
+    float: 0;
+	}
+
+
+
+/*  	figure {
+  		max-width: 100px;
+  		float: left;
+  	}*/
+
+  /*	.figclass {
+  		display: block;
+  		max-width: 1000px;
+  		float: left;
+  	}
+  */
+  	.figcapclass {
+  		max-width: 100px;
+  		text-align: left;
+  		float: left;
+  		white-space: nowrap;
+  	}
+
+
+}
+

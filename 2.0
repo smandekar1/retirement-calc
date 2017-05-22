@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My first chart using FusionCharts Suite XT</title>
+<script type="text/javascript" src="fusioncharts/js/fusioncharts.js"></script>
+<script type="text/javascript" src="fusioncharts/js/themes/fusioncharts.theme.fint.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link href="nouislider.min.css" rel="stylesheet">
+
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
+
+<script type="text/javascript">
+
+
+function AddData() {
+
+
+    var x = document.getElementById("estsocial").value;
+    
+    return x;
+}
+
+function AmtFromSav(){
+
+    var diff = document.getElementById("retage").value - document.getElementById("age").value;
+    var savann = document.getElementById("savannually").value;
+    var exprate = document.getElementById("expectedrate").value;
+
+
+    var amtFromInv = savann*(((Math.pow((1+exprate),diff))-1)/exprate);
+    
+    var alreadysav = document.getElementById("alreadysaved").value;
+    // var amtFromAlready = Math.round((alreadysav*(Math.pow((1+exprate),diff)))/12);     
+    var amtFromAlready = Math.round(.035*alreadysav*(Math.pow((1+exprate),diff))/12);
+
+
+    var fromInv = Math.round((.035 * amtFromInv)/12);
+
+    var cantake = fromInv + amtFromAlready;
+
+
+    // var amtFromInv = 32000 * diff;
+
+    return cantake;
+
+}
+
+function UpdateFields() {
+
+
+
+    
+}
+
+function WhatYouNeed() {
+    var what = Math.round((document.getElementById("annualincome").value * document.getElementById("percentneeded").value)/12);
+    return what;
+}
+
+  FusionCharts.ready(function(){
+
+    // document.getElementById('data').onload = function create() {
+
+    var revenueChart = new FusionCharts({
+        "type": "stackedcolumn2d",
+        "renderAt": "chartContainer",
+        "width": "500",
+        "height": "375",
+        "dataFormat": "json",
+        "dataSource":  {
+          // "chart": {
+    "chart": {
+        "caption": "Monthly Retirement Income Estimator",
+        "subCaption": "During retirment years",
+        "xAxisname": "Quarter",
+        "yAxisName": "Income (In USD)",
+        "showSum": "1",
+        "numberPrefix": "$",
+        "theme": "fint"
+    },
+    "categories": [
+        {
+            "category": [
+                {
+                    "label": "What you'll have"
+                },
+                {
+                    "label": "What you'll need"
+                }
+
+            ]
+        }
+    ],
+    "dataset": [
+        {
+            "seriesname": "Social Security Income",
+            "data": [
+                {
+                    "value": AddData()
+                },
+                {
+                    "value": "0"
+                }
+
+            ]
+        },
+        {
+            "seriesname": "Income From Savings",
+            "data": [
+                {
+                    "value": AmtFromSav()
+                },
+                {
+                    "value": WhatYouNeed()
+                }
+
+            ]
+        }
+    ]
+}
+});
+
+    revenueChart.render();
+  });
+
+  function Create(){
+
+
+    var revenueChart = new FusionCharts({
+        "type": "stackedcolumn2d",
+        "renderAt": "chartContainer",
+        "width": "500",
+        "height": "300",
+        "dataFormat": "json",
+        "dataSource":  {
+          // "chart": {
+    "chart": {
+        "caption": "Monthly Retirement Income Estimator",
+        "subCaption": "During retirment years",
+        "xAxisname": "Quarter",
+        "yAxisName": "Income (In USD)",
+        "showSum": "1",
+        "numberPrefix": "$",
+        "theme": "fint"
+    },
+    "categories": [
+        {
+            "category": [
+                {
+                    "label": "What you'll have"
+                },
+                {
+                    "label": "What you'll need"
+                }
+
+            ]
+        }
+    ],
+    "dataset": [
+        {
+            "seriesname": "Social Security Income",
+            "data": [
+                {
+                    "value": AddData()
+                },
+                {
+                    "value": "0"
+                }
+
+            ]
+        },
+        {
+            "seriesname": "Income From Savings",
+            "data": [
+                {
+                    "value": AmtFromSav()
+                },
+                {
+                    "value": WhatYouNeed()
+                }
+
+            ]
+        }
+    ]
+}
+});
+
+    revenueChart.render();
+  };
+
+</script>
+
+
+<script type=text/javascript>
+
+
+
+
+
+
+</script>
+</head>
+<body>
+<script src="nouislider.min.js"></script>
+
+
+<H3>RETIREMENT CALCULATOR</h3>
+
+
+</div>
+
+    <div id="forminputs" cellpadding="1" linespacing="2" border="1">
+        <br>
+        Current age: &nbsp 
+        <input id="age" name="value" type="text" value="30" onchange="AddData(), UpdateFields(), AmtFromSav(), WhatYouNeed(), Create()">
+        <br>
+        <br>Your planned Retirement Age: &nbsp 
+        <input id="retage" name="value" type="text" value="65" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <br>
+        <br>Your annual income: &nbsp 
+        <input id="annualincome" name="value" type="text" value="50000" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <br>
+        <br>Current amount you are saving annually: &nbsp 
+        <input id="savannually" name="value" type="text" value="50000" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <br>
+        <br>Amount you already have saved: &nbsp 
+        <input id="alreadysaved" name="value" type="text" value="25000" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <br>
+        <br>Percent of current income that you will need in retirement: &nbsp 
+        <input id="percentneeded" name="value" type="text" value=".75" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <br>
+        <br>Expected rate of return on you investments: &nbsp 
+        <input id="expectedrate" name="value" type="text" value=".06" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+        <br>
+        <br>Estimated monthly social security payment: &nbsp 
+        <input id="estsocial" name="value" type="text" value="1500" onchange="AddData(), UpdateFields(), AmtFromSav(), Create()">
+
+
+
+
+    </div>
+        
+    
+
+        <div class="example">
+            <div id="html5"></div>
+            
+            <input type="number" min="-20" max="40" step="1" id="input-number">
+            
+          
+<script>
+var html5Slider = document.getElementById('html5');
+
+noUiSlider.create(html5Slider, {
+    start: [25],
+    connect: false,
+    range: {
+        'min': 0,
+        'max': 85
+    }
+});
+
+
+</script>           
+
+<script>
+var inputNumber = document.getElementById('input-number');
+
+html5Slider.noUiSlider.on('update', function( values, handle ) {
+
+    var value = values[handle];
+
+    if ( handle ) {
+        inputNumber.value = value;
+    } else {
+        select.value = Math.round(value);
+    }
+});
+
+select.addEventListener('change', function(){
+    html5Slider.noUiSlider.set([this.value, null]);
+});
+
+
+</script>       </div>  
+
+<div id="slider1"></div><br><br><br>
+
+<span type="value" id="slider1Value" name="fname" ></span><br>
+
+<div>
+    <script>
+    var slider1Value = document.getElementById("slider1Value");
+    noUiSlider.create(slider1, {
+    start: 50,
+
+    // Disable animation on value-setting,
+    // so the sliders respond immediately.
+    animate: false,
+    range: {
+        min: 0,
+        max: 100
+    }
+    pips: {
+        mode: 'values',
+        values: [0, 100],
+        density: 5
+    }
+    
+});
+
+//     var slider1Value = document.getElementById("slider1Value");
+
+
+// slider1.noUiSlider.on('update', function( values, handle ){
+//     slider1Value.innerHTML = values[handle];
+// });
+
+    </script>
+</div>
+
+<div id="soft" softload></div><br><br>
+<!-- <input type="text" id="softbox" name="fname" value="Tim"><br>
+ -->
+<div id="valuebox">Value: <span id="hard" hard></span></div><br><br>
+
+<div>
+    <script>
+
+    var softSlider = document.getElementById('soft');
+
+noUiSlider.create(softSlider, {
+    start: 45,
+    range: {
+        min: 20,
+        max: 100
+    },
+    pips: {
+        mode: 'values',
+        values: [20, 60, 100],
+        density: 5
+    }
+});
+    </script>
+
+<script>
+        var softValue = document.getElementById("hard");
+
+
+softSlider.noUiSlider.on('update', function( values, handle ){
+    softValue.innerHTML = Math.round(values[handle]);
+});
+
+    </script>
+</div>
+
+
+
+
+
+
+
+  <div id="chartContainer">load here</div>
+
+  
+
+
+</body>
+</html>
